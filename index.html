@@ -1,235 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Playfair Cipher</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .container {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        label {
-            margin-top: 10px;
-            font-size: 1.2rem;
-        }
-        input[type="text"] {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-size: 1rem;
-            width: 80%;
-            max-width: 300px;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4facfe;
-            color: #fff;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-        button:hover {
-            background-color: #007acc;
-        }
-        .result, .matrix {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        .footer {
-            margin-top: 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #f0f0f0;
-        }
-        .matrix-table {
-            margin: 10px auto;
-            border-collapse: collapse;
-        }
-        .matrix-table td {
-            padding: 5px 10px;
-            border: 1px solid #fff;
-            text-align: center;
-            font-weight: bold;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .container {
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      label {
+        margin-top: 10px;
+        font-size: 1.2rem;
+      }
+      input[type="text"] {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-size: 1rem;
+        width: 80%;
+        max-width: 300px;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4facfe;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+      button:hover {
+        background-color: #007acc;
+      }
+      .result,
+      .matrix {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      .footer {
+        margin-top: 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #f0f0f0;
+      }
+      .matrix-table {
+        margin: 10px auto;
+        border-collapse: collapse;
+      }
+      .matrix-table td {
+        padding: 5px 10px;
+        border: 1px solid #fff;
+        text-align: center;
+        font-weight: bold;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Playfair Cipher</h1>
-        <form id="playfairForm">
-            <label for="keyword">Enter the Keyword:</label>
-            <input type="text" id="keyword" required>
+      <h1>Playfair Cipher</h1>
+      <form id="playfairForm">
+        <label for="keyword">Enter the Keyword:</label>
+        <input type="text" id="keyword" required />
 
-            <label for="plaintext">Enter the Text:</label>
-            <input type="text" id="plaintext" required>
+        <label for="plaintext">Enter the Text:</label>
+        <input type="text" id="plaintext" required />
 
-            <button type="button" onclick="handleEncryption()">Encrypt</button>
-            <button type="button" onclick="handleDecryption()">Decrypt</button>
-        </form>
-        <div class="matrix" id="matrix"></div>
-        <div class="result" id="cipherResult"></div>
-        <div class="footer">Developed by Belal Amr</div>
+        <button type="button" onclick="handleEncryption()">Encrypt</button>
+        <button type="button" onclick="handleDecryption()">Decrypt</button>
+      </form>
+      <div class="matrix" id="matrix"></div>
+      <div class="result" id="cipherResult"></div>
+      <div class="footer">Developed by Belal Amr</div>
     </div>
 
     <script>
-        function createKeyMatrix(key) {
-            let adjustedKey = '';
-            const seen = new Set();
-            for (let c of key.toLowerCase()) {
-                if (c === 'j') c = 'i';
-                if (/[a-z]/.test(c) && !seen.has(c)) {
-                    adjustedKey += c;
-                    seen.add(c);
-                }
-            }
-            for (let c of 'abcdefghijklmnopqrstuvwxyz') {
-                if (c === 'j') continue;
-                if (!seen.has(c)) {
-                    adjustedKey += c;
-                    seen.add(c);
-                }
-            }
-            const matrix = [];
-            let index = 0;
-            for (let i = 0; i < 5; i++) {
-                matrix.push([]);
-                for (let j = 0; j < 5; j++) {
-                    matrix[i].push(adjustedKey[index++]);
-                }
-            }
-            displayMatrix(matrix);
-            return matrix;
+      function createKeyMatrix(key) {
+        let adjustedKey = "";
+        const seen = new Set();
+        for (let c of key.toLowerCase()) {
+          if (c === "j") c = "i";
+          if (/[a-z]/.test(c) && !seen.has(c)) {
+            adjustedKey += c;
+            seen.add(c);
+          }
         }
-
-        function displayMatrix(matrix) {
-            const matrixDiv = document.getElementById('matrix');
-            let tableHTML = '<table class="matrix-table">';
-            for (let row of matrix) {
-                tableHTML += '<tr>';
-                for (let cell of row) {
-                    tableHTML += `<td>${cell.toUpperCase()}</td>`;
-                }
-                tableHTML += '</tr>';
-            }
-            tableHTML += '</table>';
-            matrixDiv.innerHTML = `<h3>5×5 Matrix:</h3>${tableHTML}`;
+        for (let c of "abcdefghijklmnopqrstuvwxyz") {
+          if (c === "j") continue;
+          if (!seen.has(c)) {
+            adjustedKey += c;
+            seen.add(c);
+          }
         }
-
-        function preprocessText(text) {
-            let cleanText = '';
-            for (let c of text.toLowerCase()) {
-                if (/[a-z]/.test(c)) {
-                    cleanText += c === 'j' ? 'i' : c;
-                }
-            }
-            let processedText = '';
-            for (let i = 0; i < cleanText.length; i++) {
-                processedText += cleanText[i];
-                if (i + 1 < cleanText.length && cleanText[i] === cleanText[i + 1]) {
-                    processedText += 'x';
-                }
-            }
-            if (processedText.length % 2 !== 0) {
-                processedText += 'x';
-            }
-            return processedText;
+        const matrix = [];
+        let index = 0;
+        for (let i = 0; i < 5; i++) {
+          matrix.push([]);
+          for (let j = 0; j < 5; j++) {
+            matrix[i].push(adjustedKey[index++]);
+          }
         }
+        displayMatrix(matrix);
+        return matrix;
+      }
 
-        function findPosition(matrix, char) {
-            for (let i = 0; i < 5; i++) {
-                for (let j = 0; j < 5; j++) {
-                    if (matrix[i][j] === char) {
-                        return [i, j];
-                    }
-                }
+      function displayMatrix(matrix) {
+        const matrixDiv = document.getElementById("matrix");
+        let tableHTML = '<table class="matrix-table">';
+        for (let row of matrix) {
+          tableHTML += "<tr>";
+          for (let cell of row) {
+            tableHTML += `<td>${cell.toUpperCase()}</td>`;
+          }
+          tableHTML += "</tr>";
+        }
+        tableHTML += "</table>";
+        matrixDiv.innerHTML = `<h3>5×5 Matrix:</h3>${tableHTML}`;
+      }
+
+      function preprocessText(text) {
+        let cleanText = "";
+        for (let c of text.toLowerCase()) {
+          if (/[a-z]/.test(c)) {
+            cleanText += c === "j" ? "i" : c;
+          }
+        }
+        let processedText = "";
+        for (let i = 0; i < cleanText.length; i++) {
+          processedText += cleanText[i];
+          if (i + 1 < cleanText.length && cleanText[i] === cleanText[i + 1]) {
+            processedText += "x";
+          }
+        }
+        if (processedText.length % 2 !== 0) {
+          processedText += "x";
+        }
+        return processedText;
+      }
+
+      function findPosition(matrix, char) {
+        for (let i = 0; i < 5; i++) {
+          for (let j = 0; j < 5; j++) {
+            if (matrix[i][j] === char) {
+              return [i, j];
             }
-            return [-1, -1];
+          }
         }
+        return [-1, -1];
+      }
 
-        function processPair(matrix, a, b, encrypt) {
-            const [rowA, colA] = findPosition(matrix, a);
-            const [rowB, colB] = findPosition(matrix, b);
-            const shift = encrypt ? 1 : -1;
+      function processPair(matrix, a, b, encrypt) {
+        const [rowA, colA] = findPosition(matrix, a);
+        const [rowB, colB] = findPosition(matrix, b);
+        const shift = encrypt ? 1 : -1;
 
-            if (rowA === rowB) {
-                return (
-                    matrix[rowA][(colA + shift + 5) % 5] +
-                    matrix[rowB][(colB + shift + 5) % 5]
-                );
-            } else if (colA === colB) {
-                return (
-                    matrix[(rowA + shift + 5) % 5][colA] +
-                    matrix[(rowB + shift + 5) % 5][colB]
-                );
-            } else {
-                return (
-                    matrix[rowA][colB] +
-                    matrix[rowB][colA]
-                );
-            }
+        if (rowA === rowB) {
+          return (
+            matrix[rowA][(colA + shift + 5) % 5] +
+            matrix[rowB][(colB + shift + 5) % 5]
+          );
+        } else if (colA === colB) {
+          return (
+            matrix[(rowA + shift + 5) % 5][colA] +
+            matrix[(rowB + shift + 5) % 5][colB]
+          );
+        } else {
+          return matrix[rowA][colB] + matrix[rowB][colA];
         }
+      }
 
-        function playfairCipher(message, matrix, encrypt) {
-            const processedText = preprocessText(message);
-            let result = '';
-            for (let i = 0; i < processedText.length; i += 2) {
-                result += processPair(
-                    matrix,
-                    processedText[i],
-                    processedText[i + 1],
-                    encrypt
-                );
-            }
-            return result.toUpperCase();
+      function playfairCipher(message, matrix, encrypt) {
+        const processedText = preprocessText(message);
+        let result = "";
+        for (let i = 0; i < processedText.length; i += 2) {
+          result += processPair(
+            matrix,
+            processedText[i],
+            processedText[i + 1],
+            encrypt
+          );
         }
+        return result.toUpperCase();
+      }
 
-        function handleEncryption() {
-            const keyword = document.getElementById('keyword').value;
-            const plaintext = document.getElementById('plaintext').value;
-            const matrix = createKeyMatrix(keyword);
-            const ciphertext = playfairCipher(plaintext, matrix, true);
-            document.getElementById('cipherResult').innerText =
-                `Ciphertext: ${ciphertext}`;
-        }
+      function handleEncryption() {
+        const keyword = document.getElementById("keyword").value;
+        const plaintext = document.getElementById("plaintext").value;
+        const matrix = createKeyMatrix(keyword);
+        const ciphertext = playfairCipher(plaintext, matrix, true);
+        document.getElementById(
+          "cipherResult"
+        ).innerText = `Ciphertext: ${ciphertext}`;
+      }
 
-        function handleDecryption() {
-            const keyword = document.getElementById('keyword').value;
-            const ciphertext = document.getElementById('plaintext').value;
-            const matrix = createKeyMatrix(keyword);
-            const plaintext = playfairCipher(ciphertext, matrix, false);
-            document.getElementById('cipherResult').innerText =
-                `Decrypted Text: ${plaintext}`;
-        }
+      function handleDecryption() {
+        const keyword = document.getElementById("keyword").value;
+        const ciphertext = document.getElementById("plaintext").value;
+        const matrix = createKeyMatrix(keyword);
+        const plaintext = playfairCipher(ciphertext, matrix, false);
+        document.getElementById(
+          "cipherResult"
+        ).innerText = `Decrypted Text: ${plaintext}`;
+      }
     </script>
-</body>
+  </body>
 </html>
